@@ -27,21 +27,9 @@
          <height>30</height>
         </size>
        </property>
-       <property name="text">
-        <string>Start</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pauseButton">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>Pause</string>
+       <property name="icon">
+        <iconset resource="../resources/resources.qrc">
+         <normaloff>:/images/play.svg</normaloff>:/images/play.svg</iconset>
        </property>
       </widget>
      </item>
@@ -53,8 +41,9 @@
          <height>30</height>
         </size>
        </property>
-       <property name="text">
-        <string>Stop</string>
+       <property name="icon">
+        <iconset resource="../resources/resources.qrc">
+         <normaloff>:/images/stop.svg</normaloff>:/images/stop.svg</iconset>
        </property>
       </widget>
      </item>
@@ -185,7 +174,9 @@
    </slots>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../resources/resources.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>startButton</sender>
@@ -195,22 +186,6 @@
    <hints>
     <hint type="sourcelabel">
      <x>58</x>
-     <y>26</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>401</x>
-     <y>263</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pauseButton</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWidget</receiver>
-   <slot>on_pause_required()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>158</x>
      <y>26</y>
     </hint>
     <hint type="destinationlabel">
@@ -286,7 +261,6 @@
  </connections>
  <slots>
   <slot>on_start_required()</slot>
-  <slot>on_pause_required()</slot>
   <slot>on_stop_required()</slot>
   <slot>on_save_required()</slot>
   <slot>on_images_removed(PyQt_PyObject)</slot>
