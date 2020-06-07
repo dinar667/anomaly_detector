@@ -31,8 +31,13 @@ class MainWidget(QWidget, Ui_MainWidget):
 
         self.calculation_service: Optional[CalculationService] = None
 
-    def on_start_required(self) -> None:
+    def on_start_required(self, play_enabled: bool) -> None:
         if not self.images_vm.count:
+            return
+
+        service = self.calculation_service
+        if service is not None and not service.stopped():
+            self.on_pause_required()
             return
 
         service = CalculationService(self.images_vm)
@@ -75,6 +80,12 @@ class MainWidget(QWidget, Ui_MainWidget):
         if self.calculation_service is None:
             return
 
+        start_btn = self.startButton
+        if start_btn.isChecked():
+            start_btn.blockSignals(True)
+            start_btn.toggle()
+            start_btn.blockSignals(False)
+
         self.calculation_service.stop()
 
     def on_save_required(self) -> None:
@@ -110,7 +121,6 @@ class MainWidget(QWidget, Ui_MainWidget):
             self.countLabel.setText(f"{vm.count} шт.")
 
     def set_interface_enabled(self, enabled: bool = True) -> None:
-        self.startButton.setEnabled(enabled)
         self.saveButton.setEnabled(enabled)
 
     def lock_interface(self) -> None:

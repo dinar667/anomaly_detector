@@ -2,5 +2,6 @@
   <qresource prefix="images/">
     <file alias="play.svg">images/play.svg</file>
     <file alias="stop.svg">images/stop.svg</file>
+    <file alias="pause.svg">images/pause.svg</file>
   </qresource>
 </RCC>

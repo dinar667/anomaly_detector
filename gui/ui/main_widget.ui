@@ -28,8 +28,12 @@
         </size>
        </property>
        <property name="icon">
-        <iconset resource="../resources/resources.qrc">
-         <normaloff>:/images/play.svg</normaloff>:/images/play.svg</iconset>
+         <iconset resource="../resources/resources.qrc">
+          <normaloff>:/images/play.svg</normaloff>
+          <activeon>:/images/pause.svg</activeon>:/images/play.svg</iconset>
+        </property>
+       <property name="checkable">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -212,7 +216,7 @@
   </connection>
   <connection>
    <sender>saveButton</sender>
-   <signal>clicked()</signal>
+   <signal>toggled(bool)</signal>
    <receiver>MainWidget</receiver>
    <slot>on_save_required()</slot>
    <hints>
@@ -260,7 +264,7 @@
   </connection>
  </connections>
  <slots>
-  <slot>on_start_required()</slot>
+  <slot>on_start_required(bool)</slot>
   <slot>on_stop_required()</slot>
   <slot>on_save_required()</slot>
   <slot>on_images_removed(PyQt_PyObject)</slot>
