@@ -133,4 +133,4 @@ dmypy.json
 .idea/
 
 # ui
-.gui/generated/
+generated/
