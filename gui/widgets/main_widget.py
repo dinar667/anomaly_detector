@@ -31,6 +31,7 @@ class MainWidget(QWidget, Ui_MainWidget):
 
         self.calculation_service: Optional[CalculationService] = None
 
+    # noinspection PyUnusedLocal
     def on_start_required(self, play_enabled: bool) -> None:
         if not self.images_vm.count:
             return
