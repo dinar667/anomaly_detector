@@ -123,6 +123,7 @@ class MainWidget(QWidget, Ui_MainWidget):
 
     def set_interface_enabled(self, enabled: bool = True) -> None:
         self.saveButton.setEnabled(enabled)
+        self.tableWidget.setEnabled(enabled)
 
     def lock_interface(self) -> None:
         self.set_interface_enabled(False)
