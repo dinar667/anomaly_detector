@@ -56,6 +56,7 @@ class MainWidget(QWidget, Ui_MainWidget):
 
     def on_calculation_completed(self) -> None:
         self.unlock_interface()
+        self.reset_play_button()
 
     def on_calculation_progress(self, current: int, count: int) -> None:
         self.progressBar.setMaximum(count)
@@ -66,6 +67,7 @@ class MainWidget(QWidget, Ui_MainWidget):
 
     def on_calculation_cancelled(self) -> None:
         self.unlock_interface()
+        self.reset_play_button()
 
     def on_pause_required(self) -> None:
         service = self.calculation_service
@@ -81,13 +83,13 @@ class MainWidget(QWidget, Ui_MainWidget):
         if self.calculation_service is None:
             return
 
-        start_btn = self.startButton
-        if start_btn.isChecked():
-            start_btn.blockSignals(True)
-            start_btn.toggle()
-            start_btn.blockSignals(False)
-
         self.calculation_service.stop()
+        self.reset_play_button()
+
+    def reset_play_button(self) -> None:
+        self.startButton.blockSignals(True)
+        self.startButton.setChecked(False)
+        self.startButton.blockSignals(False)
 
     def on_save_required(self) -> None:
         ...
