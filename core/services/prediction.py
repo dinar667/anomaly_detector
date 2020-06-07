@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from typing import Optional
+from typing import Optional, Iterable
 
 import cv2
 import numpy as np
@@ -11,7 +11,7 @@ from keras.applications.vgg16 import preprocess_input
 from keras.preprocessing import image as k_image
 
 from core.config import CalculationConfig
-from core.models.image import Image
+from core.models.image import Image, Images
 from core.models.prediction import Prediction
 from core.utils.nn_model import get_model, get_config
 
@@ -21,14 +21,15 @@ class PredictionService:
     model: Sequential
     config: CalculationConfig
 
-    def _image_tensor(self, image: Image) -> np.ndarray:
+    def _image_tensor(self, image: Image, single: bool = True) -> np.ndarray:
         img_path = image.path.as_posix()
         img = k_image.load_img(
             img_path, target_size=(self.config.width, self.config.height)
         )
         img_tensor = k_image.image.img_to_array(img)
-        img_tensor = np.expand_dims(img_tensor, axis=0)
-        img_tensor /= 255
+        if single:
+            img_tensor = np.expand_dims(img_tensor, axis=0)
+            img_tensor /= 255
         return img_tensor
 
     def predict(self, image: Image) -> Prediction:
@@ -36,6 +37,21 @@ class PredictionService:
         prediction = self.model.predict(tensor)[0]
         normal, pneumonia = prediction
         return Prediction(normal=normal, pneumonia=pneumonia)
+
+    def predict_batch(self, images: Images) -> Iterable[Prediction]:
+        n = len(images)
+        width, height = self.config.width, self.config.height
+        channels: int = 3
+        shape = (n, width, height, channels)
+        batch = np.zeros(shape=shape)
+
+        for index, img in enumerate(images):
+            tensor = self._image_tensor(img, single=False)
+            batch[index] = tensor
+
+        prediction = self.model.predict(batch)
+        for (normal, pneumonia) in prediction:
+            yield Prediction(normal=normal, pneumonia=pneumonia)
 
     def attention(self, image: Image) -> Image:
         img_path = image.path.as_posix()

@@ -37,3 +37,6 @@ class Images:
 
     def __contains__(self, item: Image) -> bool:
         return item in self._collection
+
+    def __len__(self) -> int:
+        return len(self._collection)
