@@ -28,10 +28,10 @@
         </size>
        </property>
        <property name="icon">
-         <iconset resource="../resources/resources.qrc">
-          <normaloff>:/images/play.svg</normaloff>
-          <activeon>:/images/pause.svg</activeon>:/images/play.svg</iconset>
-        </property>
+        <iconset resource="../resources/resources.qrc">
+         <normaloff>:/images/play.svg</normaloff>
+         <activeon>:/images/pause.svg</activeon>:/images/play.svg</iconset>
+       </property>
        <property name="checkable">
         <bool>true</bool>
        </property>
@@ -184,7 +184,7 @@
  <connections>
   <connection>
    <sender>startButton</sender>
-   <signal>clicked()</signal>
+   <signal>toggled(bool)</signal>
    <receiver>MainWidget</receiver>
    <slot>on_start_required()</slot>
    <hints>
@@ -216,7 +216,7 @@
   </connection>
   <connection>
    <sender>saveButton</sender>
-   <signal>toggled(bool)</signal>
+   <signal>clicked()</signal>
    <receiver>MainWidget</receiver>
    <slot>on_save_required()</slot>
    <hints>
