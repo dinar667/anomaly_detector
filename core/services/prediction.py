@@ -21,7 +21,7 @@ class PredictionService:
     model: Sequential
     config: CalculationConfig
 
-    def _image_tensor(self, image: Image, single: bool = True) -> np.ndarray:
+    def _image_tensor(self, image: Image, single: bool = False) -> np.ndarray:
         img_path = image.path.as_posix()
         img = k_image.load_img(
             img_path, target_size=(self.config.width, self.config.height)
@@ -33,7 +33,7 @@ class PredictionService:
         return img_tensor
 
     def predict(self, image: Image) -> Prediction:
-        tensor = self._image_tensor(image)
+        tensor = self._image_tensor(image, single=True)
         prediction = self.model.predict(tensor)[0]
         normal, pneumonia = prediction
         return Prediction(normal=normal, pneumonia=pneumonia)
@@ -46,7 +46,7 @@ class PredictionService:
         batch = np.zeros(shape=shape)
 
         for index, img in enumerate(images):
-            tensor = self._image_tensor(img, single=False)
+            tensor = self._image_tensor(img)
             batch[index] = tensor
 
         prediction = self.model.predict(batch)
