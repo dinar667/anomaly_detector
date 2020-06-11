@@ -1,5 +1,5 @@
 # coding: utf-8
-
+import csv
 from pathlib import Path
 from typing import List, Optional
 
@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import QWidget
 from core.models.image import Images, Image
 from gui.generated.ui_main_widget import Ui_MainWidget
 from gui.services.calculation import CalculationService
-from gui.utils.fp import image_filepath_valid
+from gui.utils.fp import image_filepath_valid, save_file_dialog
 from gui.view_models.event import Event
 from gui.view_models.image_vm import ImagesViewModel, ImageViewModel
 
@@ -93,7 +93,20 @@ class MainWidget(QWidget, Ui_MainWidget):
         self.startButton.blockSignals(False)
 
     def on_save_required(self) -> None:
-        ...
+        filepath = save_file_dialog(self, "Сохранить таблицу", "*.csv")
+        if not filepath.name:
+            return
+
+        self._save_table(filepath)
+
+    def _save_table(self, filepath: Path) -> None:
+        header, rows = self.tableWidget.dump()
+        with open(
+            filepath.as_posix(), mode="w", encoding="utf-8", newline=""
+        ) as file:
+            writer = csv.DictWriter(file, fieldnames=header, delimiter=";")
+            writer.writeheader()
+            writer.writerows(rows)
 
     def dragEnterEvent(self, event: QDragEnterEvent) -> None:
         mime_data: QMimeData = event.mimeData()

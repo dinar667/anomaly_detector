@@ -1,5 +1,5 @@
 # coding: utf-8
-from typing import List
+from typing import List, Tuple, Dict
 
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QKeyEvent
@@ -130,3 +130,17 @@ class ImagesTableWidget(QTableWidget):
         image_vm = item.image_vm
         image_widget = ImageDialog(image_vm)
         image_widget.exec()
+
+    def dump(self) -> Tuple[List[str], List[Dict[str, str]]]:
+        header = ["Название", "Пневмония", "Норма"]
+        rows = []
+
+        for i_row in range(self.rowCount()):
+            row = {
+                "Название": self.item(i_row, 0).text(),
+                "Пневмония": self.item(i_row, 1).text(),
+                "Норма": self.item(i_row, 2).text(),
+            }
+            rows.append(row)
+
+        return header, rows
