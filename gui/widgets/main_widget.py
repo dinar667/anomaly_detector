@@ -68,7 +68,9 @@ class MainWidget(QWidget, Ui_MainWidget):
         self.progressBar.setValue(current)
 
     def on_calculation_failed(self, message: str) -> None:
-        ...
+        show_error_dialog(self, f"Не удалось закончить расчёт: {message}")
+        self.unlock_interface()
+        self.reset_play_button()
 
     def on_calculation_cancelled(self) -> None:
         self.unlock_interface()
