@@ -15,7 +15,7 @@ from gui.view_models.image_vm import ImageViewModel
 from gui.widgets.image_dialog import ImageDialog
 
 
-class ImageTitleTableWidget(QTableWidgetItem):
+class ImageTitleTableWidgetItem(QTableWidgetItem):
     def __init__(self, image_vm: ImageViewModel, *args) -> None:
         super().__init__(*args)
 
@@ -115,7 +115,7 @@ class ImagesTableWidget(QTableWidget):
         return row
 
     def fill_row(self, image: ImageViewModel, row: int) -> None:
-        self.setItem(row, 0, ImageTitleTableWidget(image))
+        self.setItem(row, 0, ImageTitleTableWidgetItem(image))
         self.setItem(row, 1, NormalTableWidgetItem(image))
         self.setItem(row, 2, PneumoniaTableWidgetItem(image))
 
@@ -125,7 +125,7 @@ class ImagesTableWidget(QTableWidget):
 
     def on_cell_double_clicked(self, row: int, column: int) -> None:
         item = self.item(row, 0)
-        assert isinstance(item, ImageTitleTableWidget)
+        assert isinstance(item, ImageTitleTableWidgetItem)
 
         image_vm = item.image_vm
         image_widget = ImageDialog(image_vm)
