@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import QWidget
 from core.models.image import Images, Image
 from gui.generated.ui_main_widget import Ui_MainWidget
 from gui.services.calculation import CalculationService
-from gui.utils.dialogs import show_error_dialog
+from gui.utils.dialogs import show_error_dialog, show_success_dialog
 from gui.utils.fp import image_filepath_valid, save_file_dialog
 from gui.view_models.event import Event
 from gui.view_models.image_vm import ImagesViewModel, ImageViewModel
@@ -59,6 +59,8 @@ class MainWidget(QWidget, Ui_MainWidget):
     def on_calculation_completed(self) -> None:
         self.unlock_interface()
         self.reset_play_button()
+
+        show_success_dialog(self, "Расчёт успешно завершён!")
 
     def on_calculation_progress(self, current: int, count: int) -> None:
         self.progressBar.setMaximum(count)
