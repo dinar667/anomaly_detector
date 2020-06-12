@@ -57,6 +57,9 @@ class CalculationService(QRunnable):
                     self.status = CalculationStatus.Completed
                     self.signals.completed.emit()
                     return
+                except Exception as ex:
+                    self.status = CalculationStatus.Cancelled
+                    raise ex
 
                 if self.stopped():
                     self.signals.cancelled.emit()
