@@ -10,6 +10,7 @@ from PyQt5.QtWidgets import QWidget
 from core.models.image import Images, Image
 from gui.generated.ui_main_widget import Ui_MainWidget
 from gui.services.calculation import CalculationService
+from gui.utils.dialogs import show_error_dialog
 from gui.utils.fp import image_filepath_valid, save_file_dialog
 from gui.view_models.event import Event
 from gui.view_models.image_vm import ImagesViewModel, ImageViewModel
@@ -101,12 +102,15 @@ class MainWidget(QWidget, Ui_MainWidget):
 
     def _save_table(self, filepath: Path) -> None:
         header, rows = self.tableWidget.dump()
-        with open(
-            filepath.as_posix(), mode="w", encoding="utf-8", newline=""
-        ) as file:
-            writer = csv.DictWriter(file, fieldnames=header, delimiter=";")
-            writer.writeheader()
-            writer.writerows(rows)
+        try:
+            with open(
+                filepath.as_posix(), mode="w", encoding="utf-8", newline=""
+            ) as file:
+                writer = csv.DictWriter(file, fieldnames=header, delimiter=";")
+                writer.writeheader()
+                writer.writerows(rows)
+        except Exception as ex:
+            show_error_dialog(self, text=f"Ошибка сохранения таблицы: {ex}")
 
     def dragEnterEvent(self, event: QDragEnterEvent) -> None:
         mime_data: QMimeData = event.mimeData()
