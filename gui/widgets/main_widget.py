@@ -39,9 +39,10 @@ class MainWidget(QWidget, Ui_MainWidget):
             return
 
         service = self.calculation_service
-        if service is not None and not service.stopped():
-            self.on_pause_required()
-            return
+        if service is not None and not service.completed():
+            if not service.stopped():
+                self.on_pause_required()
+                return
 
         service = CalculationService(self.images_vm)
         service.signals.started.connect(self.on_calculation_started)
