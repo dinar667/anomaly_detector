@@ -109,12 +109,3 @@ class PredictionServiceFactory:
 
         cls.instance = PredictionService(model, config)
         return cls.instance
-
-
-# if __name__ == "__main__":
-#     test_image = Image(
-#         # Path(r"D:\ml\input\chest_xray\test\NORMAL\IM-0001-0001.jpeg")
-#         Path(r"D:\ml\input\chest_xray\test\PNEUMONIA\person1_virus_7.jpeg")
-#     )
-#     service = PredictionServiceFactory.create()
-#     attention = service.attention(test_image)
