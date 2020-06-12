@@ -77,6 +77,9 @@ class CalculationService(QRunnable):
     def stopped(self) -> None:
         return self.status is CalculationStatus.Cancelled
 
+    def completed(self) -> None:
+        return self.status is CalculationStatus.Completed
+
     def can_calculate(self) -> bool:
         return self.status not in {
             CalculationStatus.Pending,
