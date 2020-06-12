@@ -9,7 +9,7 @@ from gui.widgets.main_window import MainWindow
 
 
 @dataclass(frozen=True)
-class PDetector:
+class ADetector:
     main_window: MainWindow
 
     def run(self) -> None:
@@ -20,7 +20,7 @@ def main() -> None:
     app = QApplication(sys.argv)
 
     main_window = MainWindow()
-    pdetector = PDetector(main_window)
+    pdetector = ADetector(main_window)
     pdetector.run()
 
     sys.exit(app.exec())
