@@ -114,6 +114,9 @@ class MainWidget(QWidget, Ui_MainWidget):
                 writer = csv.DictWriter(file, fieldnames=header, delimiter=";")
                 writer.writeheader()
                 writer.writerows(rows)
+            show_success_dialog(
+                self, text=f"Таблица {filepath.name} успешно сохранена!"
+            )
         except Exception as ex:
             show_error_dialog(self, text=f"Ошибка сохранения таблицы: {ex}")
 
