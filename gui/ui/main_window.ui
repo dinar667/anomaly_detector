@@ -28,7 +28,7 @@
      <number>0</number>
     </property>
     <item>
-     <widget class="MainWidget" name="mainWidget"/>
+     <widget class="MainWidget" name="mainWidget" native="true"/>
     </item>
    </layout>
   </widget>
@@ -47,19 +47,19 @@
     </property>
     <addaction name="action_3"/>
     <addaction name="separator"/>
-    <addaction name="action"/>
+    <addaction name="exitAction"/>
    </widget>
    <widget class="QMenu" name="menu_2">
     <property name="title">
      <string>О программе</string>
     </property>
-    <addaction name="action_4"/>
+    <addaction name="aboutAction"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="action">
+  <action name="exitAction">
    <property name="text">
     <string>Выход</string>
    </property>
@@ -69,7 +69,7 @@
     <string>Добавить</string>
    </property>
   </action>
-  <action name="action_4">
+  <action name="aboutAction">
    <property name="text">
     <string>О программе</string>
    </property>
@@ -83,5 +83,25 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>aboutAction</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>on_about_required()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>306</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>on_about_required()</slot>
+ </slots>
 </ui>
