@@ -5,5 +5,5 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class CalculationConfig:
-    width: int = 300
-    height: int = 300
+    width: int = 400
+    height: int = 400
