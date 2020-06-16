@@ -11,7 +11,11 @@ from core.models.image import Images, Image
 from gui.generated.ui_main_widget import Ui_MainWidget
 from gui.services.calculation import CalculationService
 from gui.utils.dialogs import show_error_dialog, show_success_dialog
-from gui.utils.fp import image_filepath_valid, save_file_dialog
+from gui.utils.fp import (
+    image_filepath_valid,
+    save_file_dialog,
+    open_files_dialog,
+)
 from gui.view_models.event import Event
 from gui.view_models.image_vm import ImagesViewModel, ImageViewModel
 
@@ -133,13 +137,19 @@ class MainWidget(QWidget, Ui_MainWidget):
             event.ignore()
             return
 
+        paths = []
         for each in urls:
             filepath: Path = Path(each.toLocalFile())
 
             if not image_filepath_valid(filepath):
                 continue
+            paths.append(filepath)
 
-            image = Image(filepath)
+        self._load_paths(paths)
+
+    def _load_paths(self, paths: List[Path]) -> None:
+        for each in paths:
+            image = Image(each)
             self.images_vm.add(image)
 
     def on_images_updated(self, vm: ImagesViewModel, event: Event) -> None:
@@ -165,3 +175,11 @@ class MainWidget(QWidget, Ui_MainWidget):
     def on_images_removed(self, images_vm: List[ImageViewModel]) -> None:
         for image_vm in images_vm:
             self.images_vm.remove_vm(image_vm)
+
+    def on_open_images_required(self) -> None:
+        filepaths = open_files_dialog(
+            self,
+            caption="Загрузка изображений",
+            filters="Изображение (*.png *.jpg, *.jpeg)",
+        )
+        self._load_paths(filepaths)

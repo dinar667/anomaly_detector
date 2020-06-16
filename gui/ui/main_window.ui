@@ -45,7 +45,7 @@
     <property name="title">
      <string>Файл</string>
     </property>
-    <addaction name="action_3"/>
+    <addaction name="addAction"/>
     <addaction name="separator"/>
     <addaction name="exitAction"/>
    </widget>
@@ -64,7 +64,7 @@
     <string>Выход</string>
    </property>
   </action>
-  <action name="action_3">
+  <action name="addAction">
    <property name="text">
     <string>Добавить</string>
    </property>
@@ -80,6 +80,9 @@
    <class>MainWidget</class>
    <extends>QWidget</extends>
    <header>gui.widgets.main_widget</header>
+   <slots>
+    <slot>on_open_images_required()</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
@@ -97,6 +100,22 @@
     <hint type="destinationlabel">
      <x>545</x>
      <y>306</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>addAction</sender>
+   <signal>triggered()</signal>
+   <receiver>mainWidget</receiver>
+   <slot>on_open_images_required()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>307</y>
     </hint>
    </hints>
   </connection>

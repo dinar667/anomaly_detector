@@ -269,5 +269,6 @@
   <slot>on_save_required()</slot>
   <slot>on_images_removed(PyQt_PyObject)</slot>
   <slot>on_images_removing_started()</slot>
+  <slot>on_open_images_required()</slot>
  </slots>
 </ui>
