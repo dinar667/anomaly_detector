@@ -59,13 +59,13 @@ class ResultTableWidgetItem(QTableWidgetItem):
 class PneumoniaTableWidgetItem(ResultTableWidgetItem):
     def update_image_result(self, image_vm: ImageViewModel) -> None:
         result = image_vm.result
-        self.setText(f"{result.pneumonia:>.4%}")
+        self.setText(f"{result.pneumonia:>.2%}")
 
 
 class NormalTableWidgetItem(ResultTableWidgetItem):
     def update_image_result(self, image_vm: ImageViewModel) -> None:
         result = image_vm.result
-        self.setText(f"{result.normal:>.4%}")
+        self.setText(f"{result.normal:>.2%}")
 
 
 class ImagesTableWidget(QTableWidget):

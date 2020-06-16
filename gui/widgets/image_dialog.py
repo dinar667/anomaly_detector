@@ -57,8 +57,8 @@ class ImageDialog(QDialog, Ui_ImageDialog):
 
     def update_results(self) -> None:
         result = self.image_vm.result
-        self.normalLabel.setText(f"{result.normal:>.4%}")
-        self.pneumoniaLabel.setText(f"{result.pneumonia:>.4%}")
+        self.normalLabel.setText(f"{result.normal:>.2%}")
+        self.pneumoniaLabel.setText(f"{result.pneumonia:>.2%}")
 
     def on_image_vm_updated(
         self, image_vm: ImageViewModel, event: Event
