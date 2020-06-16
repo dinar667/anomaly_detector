@@ -65,6 +65,10 @@ class CalculationService(QRunnable):
                     self.signals.cancelled.emit()
                     return
 
+            if self.stopped():
+                self.signals.cancelled.emit()
+                return
+
     def pause(self) -> None:
         self.status = CalculationStatus.Pending
 
