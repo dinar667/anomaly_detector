@@ -1,12 +1,16 @@
-[tool.black]
-line-length = 80
-py36 = true
-exclude = '''
-/(
-    \.git
-    \.pytest_cache
-  | \.venv
-  | build
-  | dist
-)/
-'''
+[tool.poetry]
+name = "anomaly-detector"
+version = "0.1.0"
+description = ""
+authors = ["Dinar Akchurin <dinar667@yandex.ru>"]
+readme = "README.md"
+packages = [{include = "anomaly_detector"}]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+tensorflow = "2.1.0"
+keras = "2.3.1"
+opencv-python= "4.1.1.26"
+PyQt5 = "5.13.0"
+pillow = "8.4.0"
+h5py = "2.10.0"
