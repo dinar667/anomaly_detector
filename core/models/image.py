@@ -1,9 +1,6 @@
-# coding: utf-8
-
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import List
-
-from dataclasses import dataclass
 
 from core.models.prediction import Prediction
 
@@ -11,7 +8,7 @@ from core.models.prediction import Prediction
 @dataclass
 class Image:
     path: Path
-    result: Prediction = Prediction()
+    result: Prediction = field(default_factory=Prediction)
 
 
 @dataclass(frozen=True)
