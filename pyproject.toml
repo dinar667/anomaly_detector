@@ -7,10 +7,13 @@ readme = "README.md"
 packages = [{include = "anomaly_detector"}]
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "3.6.5"
 tensorflow = "2.1.0"
 keras = "2.3.1"
 opencv-python= "4.1.1.26"
 PyQt5 = "5.13.0"
 pillow = "8.4.0"
 h5py = "2.10.0"
+
+[tool.poetry.dev-dependencies]
+pyinstaller = "4.10.0"
